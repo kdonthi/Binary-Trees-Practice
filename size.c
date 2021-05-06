@@ -48,18 +48,46 @@ int max_depth(tnode* root)
 
 int min_value(tnode* root)
 {
-	
+	if (root->left == NULL)
+		return (root->data);
+	return (min_value(root->left));
 }
+
+void inOrder(tnode* root)
+{
+	if (root != NULL)
+	{
+		inOrder(root->left);
+		printf("%i", root->data);
+		inOrder(root->right);
+	}
+}
+
+void postOrder(tnode* root)
+{
+	if (root != NULL)
+	{
+		postOrder(root->left);
+		postOrder(root->right);
+		printf("%i", root->data);
+	}
+}
+
 int main()
 {
 	tnode* rootptr = NULL;
-	rootptr = insert(rootptr, 3);
+	rootptr = insert(rootptr, 4);
+	rootptr = insert(rootptr, 2);
 	rootptr = insert(rootptr, 5);
+	rootptr = insert(rootptr, 1);
 	rootptr = insert(rootptr, 3);
-	rootptr = insert(rootptr,39);
-	rootptr = insert(rootptr, 4);
-	rootptr = insert(rootptr, 4);
-	rootptr = insert(rootptr, 4);
+	//rootptr = insert(rootptr, 4);
+	//rootptr = insert(rootptr, 4);
+	//rootptr = insert(rootptr, 5);
 	printf("%i\n", size(rootptr));
 	printf("%i\n", max_depth(rootptr));
+	printf("%i\n", min_value(rootptr));
+	inOrder(rootptr);
+	printf("\n");
+	postOrder(rootptr);
 }
